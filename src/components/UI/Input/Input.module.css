@@ -1,0 +1,50 @@
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  margin: 1rem 0;
+}
+
+.control label,
+.control input {
+  display: block;
+}
+
+.control label {
+  flex: 1;
+
+  margin-bottom: 0.5rem;
+
+  font-weight: bold;
+  color: #464646;
+}
+
+.control input {
+  flex: 3;
+
+  padding: 0.35rem 0.35rem;
+
+  font: inherit;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.control input:focus {
+  border-color: #4f005f;
+  background: #f6dbfc;
+  outline: none;
+}
+
+.control.invalid input {
+  border-color: red;
+  background: #fbdada;
+}
+
+@media (min-width: 768px) {
+  .control {
+    align-items: center;
+    flex-direction: row;
+  }
+}
