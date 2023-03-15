@@ -1,8 +1,15 @@
-import { useState, useReducer, useEffect, useRef } from 'react';
+import {
+  useState,
+  useReducer,
+  useEffect,
+  useRef,
+  useContext
+} from 'react';
 
 import Card from '../UI/Card/Card';
 import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
+import AuthContext from '../../store/auth-context';
 import classes from './Login.module.css';
 
 const emailReducer = (state, action) => {
@@ -33,7 +40,7 @@ const passwordReducer = (state, action) => {
   return { value: '', isValid: false };
 };
 
-const Login = (props) => {
+const Login = () => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
@@ -66,6 +73,8 @@ const Login = (props) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
+  const authCtx = useContext(AuthContext);
+
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: 'USER_INPUT', value: event.target.value });
   };
@@ -85,7 +94,7 @@ const Login = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     if (formIsValid) {
-      props.onLogin(emailState.value, passwordState.value);
+      authCtx.onLogin(emailState.value, passwordState.value);
     } else if (!emailIsValid) {
       emailInputRef.current.focus();
     } else {
